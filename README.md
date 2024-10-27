@@ -1,5 +1,5 @@
-# CSE3022M COURSE PROJECT:  LLM SCIENCE EXAM 📝
-
+# AnsBob:  Answering LLM Science Exam Based on BERT 📝
+This is a repository for our final course project in CSE3022M "Introduction to Big Data Analytics and Application".
 ## 0. Quick Start
 
 ## 1. Introduction
