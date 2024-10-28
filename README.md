@@ -1,4 +1,6 @@
 # AnsBob:  Answering LLM Science Exam Based on BERT 📝
+## This repo is under construction
+
 ## Overview
 This is a repository for our final course project in CSE3022M "Introduction to Big Data Analytics and Application".
 
