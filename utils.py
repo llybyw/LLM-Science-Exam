@@ -4,7 +4,7 @@ import os
 import dashscope
 
 
-dashscope.api_key = "sk-76a64e55b5ff4b89b63eafeb81186784"
+dashscope.api_key = "Your Qwen API"
 
 def send_request(messages, model='qwen-plus'):
     """发送POST请求到指定的API, 并返回响应数据。"""
