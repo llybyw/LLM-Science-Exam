@@ -8,18 +8,29 @@ result_file = './data/extra_data.csv'
 def parse_args():
     parser = argparse.ArgumentParser()
 
-    parser = argparse.ArgumentParser(description="Generate questions from LLM.")
+    parser = argparse.ArgumentParser(description="No.")
     parser.add_argument('--query', action='store_true', help="Request quetions from LLM.")
+    parser.add_argument('--prompt_dir', default='./prompt/question_generation.txt', help='Directory containing prompt files')
+    parser.add_argument('--train_dir', default='./data/train_data_6k.csv' , help='Directory containing the input CSV training file')
+    parser.add_argument('--test_dir', default='./data/test_data_0.5k.csv', help='Directory containing the input CSV training file')
+    parser.add_argument('--model_dir', default='./bert-base-cased', help='Directory containing model files')
+
 
     args = parser.parse_args()
     return args
 
-if __name__ == "__main__":
+def main():
 
     args = parse_args()
+    
+    is_query = args.query
+    prompt_dir = args.prompt_dir
+    train_dir = args.train_dir
+    test_dir = args.test_dir
+    model_dir = args.model_dir
 
-    if args.query:
-        prompt_text = read_prompt(prompt_file)
+    if is_query:
+        prompt_text = read_prompt(prompt_dir)
     
         messages = [{
             'role': 'user',
@@ -41,11 +52,10 @@ if __name__ == "__main__":
     
         write_result(result_file, generated_text)
 
-'''
     # 加载训练数据
-    train_df = load_and_prepare_data('./data/train.csv')
+    train_df = load_and_prepare_data(train_dir)
     train_ds = create_dataset(train_df)
-    tokenizer = setup_tokenizer('./bert-base-cased')
+    tokenizer = setup_tokenizer(model_dir)
 
     # 预处理训练集
     tokenized_train_ds = train_ds.map(preprocess_example, batched=False, remove_columns=['prompt', 'A', 'B', 'C', 'D', 'E', 'answer'])
@@ -54,7 +64,7 @@ if __name__ == "__main__":
     trainer = train_model(tokenized_train_ds)
 
     # 对测试集进行相同处理
-    test_df = load_and_prepare_data('./data/test.csv')
+    test_df = load_and_prepare_data(test_dir)
     test_df['answer'] = 'A'  # 假设答案是A
     test_ds = create_dataset(test_df)
     tokenized_test_ds = test_ds.map(preprocess_example, batched=False, remove_columns=['prompt', 'A', 'B', 'C', 'D', 'E', 'answer'])
@@ -64,4 +74,6 @@ if __name__ == "__main__":
     submission_df = test_df[['id']].copy()
     submission_df['prediction'] = predictions_to_map_output(test_predictions.predictions)
     submission_df.to_csv('submission.csv', index=False)
-'''
+
+if __name__ == "__main__":
+    main()
