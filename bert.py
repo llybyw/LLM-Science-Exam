@@ -9,13 +9,21 @@ from typing import Optional, Union
 from transformers import AutoModelForMultipleChoice, TrainingArguments, Trainer
 
 
-train_df = pd.read_csv('D:\\PyCharm\\Big Data Homework\\LLM Science Exam\\kaggle-llm-science-exam\\train.csv')
+train_df = pd.read_csv('./data/train.csv')
 
-train_df.head()
+# train_df.head()
+train_df['prompt'] = train_df['prompt'].astype(str)
+train_df['A'] = train_df['A'].astype(str)
+train_df['B'] = train_df['B'].astype(str)
+train_df['C'] = train_df['C'].astype(str)
+train_df['D'] = train_df['D'].astype(str)
+train_df['E'] = train_df['E'].astype(str)
+
+print(train_df.dtypes)
 
 train_ds = Dataset.from_pandas(train_df)
 
-model_dir = 'D:\\PyCharm\\Big Data Homework\\LLM Science Exam\\bert-base-cased'
+model_dir = './bert-base-cased'
 tokenizer = AutoTokenizer.from_pretrained(model_dir)
 
 
@@ -69,7 +77,7 @@ class DataCollatorForMultipleChoice:
         return batch
 
 
-model_dir = 'D:\\PyCharm\\Big Data Homework\\LLM Science Exam\\bert-base-cased' #'finetuned bert'
+model_dir = './bert-base-cased' #'finetuned bert'
 model = AutoModelForMultipleChoice.from_pretrained(model_dir)
 training_args = TrainingArguments(
         output_dir=model_dir,
@@ -103,7 +111,7 @@ def predictions_to_map_output(predictions):
 
 predictions_to_map_output(predictions.predictions)
 
-test_df = pd.read_csv('D:\\PyCharm\\Big Data Homework\\LLM Science Exam\\kaggle-llm-science-exam\\test.csv')
+test_df = pd.read_csv('./data/test.csv')
 test_df.head()
 
 test_df['answer'] = 'A'
