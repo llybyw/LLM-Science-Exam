@@ -7,6 +7,9 @@ from datasets import Dataset
 from dataclasses import dataclass
 from typing import Optional, Union
 
+model_dir = './bert-base-cased'
+tokenizer = AutoTokenizer.from_pretrained(model_dir)
+
 def load_and_prepare_data(file_path: str) -> pd.DataFrame:
     """加载CSV数据，并进行必要的类型转换"""
     df = pd.read_csv(file_path)
@@ -22,9 +25,9 @@ def setup_tokenizer(model_dir: str) -> AutoTokenizer:
     """初始化tokenizer"""
     return AutoTokenizer.from_pretrained(model_dir)
 
-
 def preprocess_example(example, options='ABCDE'):
     """对单个样本进行预处理，以适应多选模型输入格式"""
+    
     first_sentence = [example['prompt']] * len(options)
     second_sentence = [example[option] for option in options]
     tokenized_example = tokenizer(first_sentence, second_sentence, truncation=True)
@@ -63,6 +66,8 @@ class DataCollatorForMultipleChoice:
 def train_model(tokenized_train_ds, model_dir='./bert-base-cased'):
     """训练模型并返回Trainer实例"""
     model = AutoModelForMultipleChoice.from_pretrained(model_dir)
+    tokenizer = AutoTokenizer.from_pretrained(model_dir)
+    
     training_args = TrainingArguments(
         output_dir=model_dir,
         evaluation_strategy="epoch",
