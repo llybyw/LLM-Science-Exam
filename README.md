@@ -1,5 +1,11 @@
 # AnsBob:  Answering LLM Science Exam Based on BERT 📝
+## Overview
 This is a repository for our final course project in CSE3022M "Introduction to Big Data Analytics and Application".
+
+The pipeline of our work:
+
+![figure 1](./asset/pipeline.png)
+
 ## 0. Quick Start
 1. Make sure you have installed CUDA and Pytorch.
 2. Install the environment by ``conda create env -f environment.yml``
