@@ -5,7 +5,7 @@ dependencies:
   - python>=3.8
   - pandas
   - datasets
-  - transformers
+  - transformers[torch]
   - dataclasses
   - typing
   - pytorch
