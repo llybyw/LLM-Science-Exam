@@ -116,7 +116,16 @@ test_df.head()
 
 test_df['answer'] = 'A'
 
+test_df['prompt'] = test_df['prompt'].astype(str)
+test_df['A'] = test_df['A'].astype(str)
+test_df['B'] = test_df['B'].astype(str)
+test_df['C'] = test_df['C'].astype(str)
+test_df['D'] = test_df['D'].astype(str)
+test_df['E'] = test_df['E'].astype(str)
+
 test_ds = Dataset.from_pandas(test_df)
+
+
 tokenized_test_ds = test_ds.map(preprocess, batched=False,
                                     remove_columns=['prompt', 'A', 'B', 'C', 'D', 'E', 'answer'])
 
