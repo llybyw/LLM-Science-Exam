@@ -1,6 +1,11 @@
 id,prompt,A,B,C,D,E,answer
-0,What is the main function of chlorophyll in plants?,To absorb light energy for photosynthesis.,To transport water and minerals.,To store nutrients.,To provide structural support.,To attract pollinators.,A
-1,Which of the following elements is a metalloid?,Iron,Silicon,Gold,Helium,Oxygen,B
-2,What is the process called when a solid changes directly into a gas without passing through the liquid state?,Sublimation,Deposition,Condensation,Vaporization,Freezing,A
-3,Which of the following is an example of a chemical change?,Water boiling,Wood burning,Ice melting,Clay drying,Steel bending,B
-4,What is the smallest particle of an element that retains all the properties of that element?,Molecule,Atom,Proton,Neutron,Electron,B
+0,What is the chemical symbol for gold?,Au,Ag,Fe,Cu,Pt,A
+1,Which planet is known as the Red Planet?,Mars,Venus,Earth,Jupiter,Saturn,A
+2,What is the process by which plants convert sunlight into energy called?,Photosynthesis,Respiration,Fermentation,Osmosis,Diffusion,A
+3,Who proposed the theory of evolution by natural selection?,Charles Darwin,Albert Einstein,Isaac Newton,Marie Curie,Nikola Tesla,A
+4,What is the smallest unit of matter that retains its chemical properties?,Atom,Molecule,Proton,Neutron,Electron,A
+5,What is the force that pulls objects toward the center of the Earth called?,Gravity,Magnetism,Friction,Tension,Normal Force,A
+6,What is the pH level of pure water at room temperature?,7,6,8,9,10,A
+7,What is the main gas found in the Earth's atmosphere?,Nitrogen,Oxygen,Carbon Dioxide,Argon,Helium,A
+8,What is the term for the study of the structure and function of the body using anatomic and microscopic examination?,Anatomy,Physiology,Biochemistry,Genetics,Pathology,A
+9,What is the name of the largest organ in the human body?,Skin,Liver,Heart,Lungs,Kidneys,A
