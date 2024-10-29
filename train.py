@@ -95,13 +95,9 @@ def train_model(tokenized_train_ds, model_dir='./bert-base-cased', save_dir='./m
     print(f"Model saved at :{save_dir}.")
     return trainer
 
-
-
 def predictions_to_map_output(predictions, options='ABCDE'):
     """将预测结果转换成最终提交格式"""
     sorted_answer_indices = np.argsort(-predictions, axis=-1)
     top_answer_indices = sorted_answer_indices[:, :3]
     top_answers = np.vectorize({index: option for index, option in enumerate(options)}.get)(top_answer_indices)
     return np.apply_along_axis(lambda row: ' '.join(row), 1, top_answers)
-
-    
