@@ -2,8 +2,8 @@ import argparse
 from train import load_and_prepare_data, create_dataset, setup_tokenizer, preprocess_example, train_model, predictions_to_map_output
 from utils import read_prompt, generate_plan, write_result, use_cached_plan
 
-prompt_file = './prompt/question_generation.txt'
-result_file = './data/extra_data.csv'
+
+result_dir = './data/extra_data.csv'
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -13,8 +13,8 @@ def parse_args():
     parser.add_argument('--prompt_dir', default='./prompt/question_generation.txt', help='Directory containing prompt files')
     parser.add_argument('--train_dir', default='./data/train_data_6k.csv' , help='Directory containing the input CSV training file')
     parser.add_argument('--test_dir', default='./data/test_data_0.5k.csv', help='Directory containing the input CSV training file')
-    parser.add_argument('--model_dir', default='./bert-base-cased', help='Directory containing model files')
-
+    parser.add_argument('--model_dir', default='./bert-base-cased', help='Directory containing pre-trained model files')
+    parser.add_argument('--save_dir', default='./model/finetuned_bert', help='Directory to save your model files')
 
     args = parser.parse_args()
     return args
@@ -28,6 +28,7 @@ def main():
     train_dir = args.train_dir
     test_dir = args.test_dir
     model_dir = args.model_dir
+    save_dir = args.save_dir
 
     if is_query:
         prompt_text = read_prompt(prompt_dir)
@@ -50,13 +51,15 @@ def main():
         print(generated_text)
         print("------------------------------------------------------------")
     
-        write_result(result_file, generated_text)
+        write_result(result_dir, generated_text)
 
     # 加载训练数据
+    if args.query:
+        train_dir = result_dir
     train_df = load_and_prepare_data(train_dir)
     train_ds = create_dataset(train_df)
     tokenizer = setup_tokenizer(model_dir)
-
+  
     # 预处理训练集
     tokenized_train_ds = train_ds.map(preprocess_example, batched=False, remove_columns=['prompt', 'A', 'B', 'C', 'D', 'E', 'answer'])
 
