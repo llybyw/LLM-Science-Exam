@@ -1,7 +1,6 @@
 import argparse
 from train import load_and_prepare_data, create_dataset, setup_tokenizer, preprocess_example, train_model, predictions_to_map_output
-from utils import read_prompt, generate_plan, write_result, use_cached_plan
-
+from utils.utils import read_prompt, generate_plan, write_result, use_cached_plan
 
 result_dir = './data/extra_data.csv'
 
@@ -76,7 +75,8 @@ def main():
     test_predictions = trainer.predict(tokenized_test_ds)
     submission_df = test_df[['id']].copy()
     submission_df['prediction'] = predictions_to_map_output(test_predictions.predictions)
-    submission_df.to_csv('submission.csv', index=False)
+
+    submission_df.to_csv('./output/submission.csv', index=False)
 
 if __name__ == "__main__":
     main()
