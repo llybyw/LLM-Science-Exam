@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     # Paths to the test and prediction files
     test_file = './data/test_data_0.5k.csv'  # Replace with your test file path
-    prediction_file = 'submission.csv'  # Replace with your prediction file path
+    prediction_file = './output/submission.csv'  # Replace with your prediction file path
 
     # Evaluate the MAP@3
     evaluate_map_at_3(test_file, prediction_file)
