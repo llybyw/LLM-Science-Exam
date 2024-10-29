@@ -63,11 +63,11 @@ class DataCollatorForMultipleChoice:
         batch['labels'] = torch.tensor(labels, dtype=torch.int64)
         return batch
 
-def train_model(tokenized_train_ds, model_dir='./bert-base-cased'):
+def train_model(tokenized_train_ds, model_dir='./bert-base-cased', save_dir='./model/finetuned_bert'):
     """训练模型并返回Trainer实例"""
     model = AutoModelForMultipleChoice.from_pretrained(model_dir)
     tokenizer = AutoTokenizer.from_pretrained(model_dir)
-    
+
     training_args = TrainingArguments(
         output_dir=model_dir,
         evaluation_strategy="epoch",
@@ -91,7 +91,11 @@ def train_model(tokenized_train_ds, model_dir='./bert-base-cased'):
     )
 
     trainer.train()
+    trainer.save_model(save_dir)
+    print(f"Model saved at :{save_dir}.")
     return trainer
+
+
 
 def predictions_to_map_output(predictions, options='ABCDE'):
     """将预测结果转换成最终提交格式"""
